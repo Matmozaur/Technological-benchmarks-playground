@@ -21,3 +21,17 @@ async def simple_write(request: BaseItem):
     except AssertionError:
         return {"message": "n"}
     return {"message": "y"}
+
+
+@app.get("/simple_read_sync")
+def simple_read_sync():
+    return {"message": "x"}
+
+
+@app.post("/simple_write_sync")
+def simple_write_sync(request: BaseItem):
+    try:
+        assert request.name == 'x'
+    except AssertionError:
+        return {"message": "n"}
+    return {"message": "y"}

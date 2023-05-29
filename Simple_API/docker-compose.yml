@@ -8,11 +8,11 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.02'
+          cpus: '0.25'
           memory: 500M
         reservations:
-          cpus: '0.01'
-          memory: 250M
+          cpus: '0.1'
+          memory: 300M
       restart_policy:
         condition: on-failure
         max_attempts: 3
@@ -25,11 +25,11 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.02'
+          cpus: '0.25'
           memory: 500M
         reservations:
-          cpus: '0.01'
-          memory: 250M
+          cpus: '0.1'
+          memory: 300M
       restart_policy:
         condition: on-failure
         max_attempts: 3

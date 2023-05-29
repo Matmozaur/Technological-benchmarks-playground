@@ -18,5 +18,19 @@ async def simple_write():
     return {"message": "y"}
 
 
+@app.route("/simple_read_sync", methods=['GET'])
+def simple_read_sync():
+    return {"message": "x"}
+
+
+@app.route("/simple_write_sync", methods=['POST'])
+def simple_write_sync():
+    try:
+        assert request.get_json()['name'] == 'x'
+    except AssertionError:
+        return {"message": "n"}
+    return {"message": "y"}
+
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8081)
