@@ -35,3 +35,21 @@ services:
         max_attempts: 3
     ports:
       - "8082:8081"
+
+  fiber:
+    build:
+      context: ./fiber
+      dockerfile: ./Dockerfile
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 500M
+        reservations:
+          cpus: '0.1'
+          memory: 300M
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+    ports:
+      - "8083:8082"
