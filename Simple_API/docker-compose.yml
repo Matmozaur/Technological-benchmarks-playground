@@ -2,6 +2,7 @@ version: "3.9"
 
 services:
   fast_api:
+    container_name: fast_api_api
     build:
       context: ./fast_api
       dockerfile: ./Dockerfile
@@ -13,12 +14,14 @@ services:
         reservations:
           cpus: '0.01'
           memory: 100M
+
       restart_policy:
         condition: on-failure
         max_attempts: 3
     ports:
       - "8081:8080"
   flask:
+    container_name: flask_api
     build:
       context: ./flask
       dockerfile: ./Dockerfile
@@ -37,6 +40,7 @@ services:
       - "8082:8081"
 
   fiber:
+    container_name: fiber_api
     build:
       context: ./fiber
       dockerfile: ./Dockerfile
@@ -53,3 +57,22 @@ services:
         max_attempts: 3
     ports:
       - "8083:8082"
+
+  comparison:
+    container_name: comparison_script
+    build:
+      context: ./comparison
+      dockerfile: ./Dockerfile
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+      restart_policy:
+        condition: on-failure
+        max_attempts: 2
+    volumes:
+      - ./comparison/results:/app/results
+    depends_on:
+      - fiber
+      - flask
+      - fast_api
