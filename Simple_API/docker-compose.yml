@@ -9,17 +9,16 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.25'
+          cpus: '2.0'
           memory: 500M
         reservations:
-          cpus: '0.01'
-          memory: 100M
-
+          cpus: '2.0'
+          memory: 500M
       restart_policy:
         condition: on-failure
         max_attempts: 3
     ports:
-      - "8081:8080"
+      - "8081:8081"
   flask:
     container_name: flask_api
     build:
@@ -28,16 +27,16 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.25'
+          cpus: '2.0'
           memory: 500M
         reservations:
-          cpus: '0.01'
-          memory: 100M
+          cpus: '2.0'
+          memory: 500M
       restart_policy:
         condition: on-failure
         max_attempts: 3
     ports:
-      - "8082:8081"
+      - "8082:8082"
 
   fiber:
     container_name: fiber_api
@@ -47,16 +46,35 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.25'
+          cpus: '2.0'
           memory: 500M
         reservations:
-          cpus: '0.01'
-          memory: 100M
+          cpus: '2.0'
+          memory: 500M
       restart_policy:
         condition: on-failure
         max_attempts: 3
     ports:
-      - "8083:8082"
+      - "8083:8083"
+
+  gin:
+    container_name: gin_api
+    build:
+      context: ./gin
+      dockerfile: ./Dockerfile
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 500M
+        reservations:
+          cpus: '2.0'
+          memory: 500M
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+    ports:
+      - "8084:8084"
 
   comparison:
     container_name: comparison_script
@@ -66,13 +84,18 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.1'
+          cpus: '1.0'
+          memory: 500M
+        reservations:
+          cpus: '1.0'
+          memory: 500M
       restart_policy:
         condition: on-failure
-        max_attempts: 2
+        max_attempts: 3
     volumes:
       - ./comparison/results:/app/results
     depends_on:
       - fiber
       - flask
       - fast_api
+      - gin
