@@ -1,5 +1,10 @@
 from flask import Flask
 from flask import request
+import logging
+
+
+log = logging.getLogger()
+log.setLevel(logging.ERROR)
 
 app = Flask(__name__)
 

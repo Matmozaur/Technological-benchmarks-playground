@@ -15,12 +15,12 @@ if __name__ == "__main__":
     endpoints = ['simple_read', 'simple_write']
     numbers = [10, 100, 1000, 10000]
 
-    for freamework, port in containers:
-        results[freamework] = dict()
+    for number in numbers:
+        results[number] = dict()
         for endpoint in endpoints:
-            results[freamework][endpoint] = dict()
-            results[freamework][endpoint]['sequentional'] = dict()
-            for number in numbers:
+            results[number][endpoint] = dict()
+            results[number][endpoint]['sequentional'] = dict()
+            for freamework, port in containers:
                 requests.get(f'http://{freamework}:{port}/{endpoint}')
                 time.sleep(0.5)
                 match endpoint:
@@ -33,14 +33,14 @@ if __name__ == "__main__":
                         for i in range(number):
                             r = requests.get(f'http://{freamework}:{port}/{endpoint}')
                 t = time.time() - start
-                results[freamework][endpoint]['sequentional'][number] = t
+                results[number][endpoint]['sequentional'][freamework] = t
                 logging.info(f'Sequentional {freamework}: {endpoint}: {number}: {t}s')
                 time.sleep(1)
 
-    for freamework, port in containers:
+    for number in numbers:
         for endpoint in endpoints:
-            results[freamework][endpoint]['concurrent'] = dict()
-            for number in numbers:
+            results[number][endpoint]['concurrent'] = dict()
+            for freamework, port in containers:
                 requests.get(f'http://{freamework}:{port}/{endpoint}')
                 time.sleep(0.5)
                 match endpoint:
@@ -52,7 +52,7 @@ if __name__ == "__main__":
                         r = (grequests.get(f'httpl://{freamework}:{port}/{endpoint}') for _ in range(number))
                 r = grequests.map(r)
                 t = time.time() - start
-                results[freamework][endpoint]['concurrent'][number] = t
+                results[number][endpoint]['concurrent'][freamework] = t
                 logging.info(f'Concurrent {freamework}: {endpoint}: {number}: {t}')
                 time.sleep(1)
     

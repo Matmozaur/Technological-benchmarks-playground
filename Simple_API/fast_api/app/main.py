@@ -1,5 +1,10 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
+import logging
+
+
+log = logging.getLogger()
+log.setLevel(logging.ERROR)
 
 
 app = FastAPI()
