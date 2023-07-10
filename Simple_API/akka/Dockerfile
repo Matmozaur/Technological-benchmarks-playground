@@ -1,17 +1,14 @@
-# Use a base image with a JVM and Scala pre-installed
-FROM hseeberger/scala-sbt:8u242_1.4.1_2.13.3
+# Use a base image with Java JDK
+FROM openjdk:11-jdk-slim
 
-# Set the working directory in the container
+# Set the working directory inside the container
 WORKDIR /app
 
-# Copy the Scala source code and build.sbt file to the working directory
-COPY . /app
+# Copy the Scala source code
+COPY app/Main.scala /app
 
-# Build the Scala project
-RUN sbt compile
+# Install Scala
+RUN apt-get update && apt-get install -y scala
 
-# Expose the port on which the server will listen (change it if needed)
-EXPOSE 8080
-
-# Start the Scala application
-CMD sbt run
+# Compile and run the Scala application
+CMD ["scala", "-nocompdaemon", "Main.scala"]

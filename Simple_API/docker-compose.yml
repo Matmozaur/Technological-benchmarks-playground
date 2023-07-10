@@ -76,6 +76,25 @@ services:
     ports:
       - "8084:8084"
 
+  akka:
+    container_name: akka
+    build:
+      context: ./akka
+      dockerfile: ./Dockerfile
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 500M
+        reservations:
+          cpus: '0.1'
+          memory: 100M
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+    ports:
+      - "8085:8085"
+
   comparison:
     container_name: comparison_script
     build:
@@ -99,3 +118,4 @@ services:
       - flask
       - fast_api
       - gin
+      - akka
