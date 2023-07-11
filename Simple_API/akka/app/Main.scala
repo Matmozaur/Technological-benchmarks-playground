@@ -68,11 +68,10 @@ object Main extends App {
   println("Server online. Press RETURN to stop...")
   StdIn.readLine()
 
-  bindingFuture
-    .flatMap(_.unbind())
-    .onComplete(_ => system.terminate())
-      // Keep the application running
-  while (true) {
-    Thread.sleep(1000)
+  // Keep the server running by waiting for a termination signal
+  sys.addShutdownHook {
+    bindingFuture
+      .flatMap(_.unbind())
+      .onComplete(_ => system.terminate())
   }
 }
