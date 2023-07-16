@@ -19,7 +19,7 @@ func main() {
 	app := fiber.New()
 
 	// Routes
-	app.Get("/simple_read_sync", func(c *fiber.Ctx) error {
+	app.Get("/simple_read", func(c *fiber.Ctx) error {
 		return c.JSON(fiber.Map{"message": "x"})
 	})
 

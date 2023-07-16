@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   fast_api:
-    container_name: fast_api_api
+    container_name: fast_api
     build:
       context: ./fast_api
       dockerfile: ./Dockerfile
@@ -17,7 +17,7 @@ services:
     ports:
       - "8081:8081"
   flask:
-    container_name: flask_api
+    container_name: flask
     build:
       context: ./flask
       dockerfile: ./Dockerfile
@@ -33,7 +33,7 @@ services:
       - "8082:8082"
 
   fiber:
-    container_name: fiber_api
+    container_name: fiber
     build:
       context: ./fiber
       dockerfile: ./Dockerfile
@@ -49,7 +49,7 @@ services:
       - "8083:8083"
 
   gin:
-    container_name: gin_api
+    container_name: gin
     build:
       context: ./gin
       dockerfile: ./Dockerfile
@@ -89,10 +89,7 @@ services:
       resources:
         limits:
           cpus: '2.0'
-          memory: 500M
-        reservations:
-          cpus: '2.0'
-          memory: 500M
+          memory: 2000M
     volumes:
       - ./comparison/results:/app/results
     depends_on:
