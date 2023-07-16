@@ -1,80 +1,80 @@
 version: "3.9"
 
 services:
-#  fast_api:
-#    container_name: fast_api_api
-#    build:
-#      context: ./fast_api
-#      dockerfile: ./Dockerfile
-#    deploy:
-#      resources:
-#        limits:
-#          cpus: '2.0'
-#          memory: 500M
-#        reservations:
-#          cpus: '2.0'
-#          memory: 100M
-#      restart_policy:
-#        condition: on-failure
-#        max_attempts: 3
-#    ports:
-#      - "8081:8081"
-#  flask:
-#    container_name: flask_api
-#    build:
-#      context: ./flask
-#      dockerfile: ./Dockerfile
-#    deploy:
-#      resources:
-#        limits:
-#          cpus: '2.0'
-#          memory: 500M
-#        reservations:
-#          cpus: '2.0'
-#          memory: 100M
-#      restart_policy:
-#        condition: on-failure
-#        max_attempts: 3
-#    ports:
-#      - "8082:8082"
-#
-#  fiber:
-#    container_name: fiber_api
-#    build:
-#      context: ./fiber
-#      dockerfile: ./Dockerfile
-#    deploy:
-#      resources:
-#        limits:
-#          cpus: '2.0'
-#          memory: 500M
-#        reservations:
-#          cpus: '2.0'
-#          memory: 100M
-#      restart_policy:
-#        condition: on-failure
-#        max_attempts: 3
-#    ports:
-#      - "8083:8083"
-#
-#  gin:
-#    container_name: gin_api
-#    build:
-#      context: ./gin
-#      dockerfile: ./Dockerfile
-#    deploy:
-#      resources:
-#        limits:
-#          cpus: '2.0'
-#          memory: 500M
-#        reservations:
-#          cpus: '2.0'
-#          memory: 100M
-#      restart_policy:
-#        condition: on-failure
-#        max_attempts: 3
-#    ports:
-#      - "8084:8084"
+  fast_api:
+    container_name: fast_api_api
+    build:
+      context: ./fast_api
+      dockerfile: ./Dockerfile
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 2000M
+        reservations:z
+          cpus: '2.0'
+          memory: 1000M
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+    ports:
+      - "8081:8081"
+  flask:
+    container_name: flask_api
+    build:
+      context: ./flask
+      dockerfile: ./Dockerfile
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 500M
+        reservations:
+          cpus: '2.0'
+          memory: 100M
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+    ports:
+      - "8082:8082"
+
+  fiber:
+    container_name: fiber_api
+    build:
+      context: ./fiber
+      dockerfile: ./Dockerfile
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 500M
+        reservations:
+          cpus: '2.0'
+          memory: 100M
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+    ports:
+      - "8083:8083"
+
+  gin:
+    container_name: gin_api
+    build:
+      context: ./gin
+      dockerfile: ./Dockerfile
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 500M
+        reservations:
+          cpus: '2.0'
+          memory: 100M
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+    ports:
+      - "8084:8084"
 
   akka:
     container_name: akka
@@ -85,7 +85,7 @@ services:
       resources:
         limits:
           cpus: '2.0'
-          memory: 5000M
+          memory: 2000M
         reservations:
           cpus: '2.0'
           memory: 1000M
@@ -111,8 +111,8 @@ services:
     volumes:
       - ./comparison/results:/app/results
     depends_on:
-#      - fiber
-#      - flask
-#      - fast_api
-#      - gin
+      - fiber
+      - flask
+      - fast_api
+      - gin
       - akka
