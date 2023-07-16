@@ -11,9 +11,6 @@ services:
         limits:
           cpus: '2.0'
           memory: 2000M
-        reservations:z
-          cpus: '2.0'
-          memory: 1000M
       restart_policy:
         condition: on-failure
         max_attempts: 3
@@ -28,10 +25,7 @@ services:
       resources:
         limits:
           cpus: '2.0'
-          memory: 500M
-        reservations:
-          cpus: '2.0'
-          memory: 100M
+          memory: 2000M
       restart_policy:
         condition: on-failure
         max_attempts: 3
@@ -47,10 +41,7 @@ services:
       resources:
         limits:
           cpus: '2.0'
-          memory: 500M
-        reservations:
-          cpus: '2.0'
-          memory: 100M
+          memory: 2000M
       restart_policy:
         condition: on-failure
         max_attempts: 3
@@ -66,10 +57,7 @@ services:
       resources:
         limits:
           cpus: '2.0'
-          memory: 500M
-        reservations:
-          cpus: '2.0'
-          memory: 100M
+          memory: 2000M
       restart_policy:
         condition: on-failure
         max_attempts: 3
@@ -86,9 +74,6 @@ services:
         limits:
           cpus: '2.0'
           memory: 2000M
-        reservations:
-          cpus: '2.0'
-          memory: 1000M
       restart_policy:
         condition: on-failure
         max_attempts: 3

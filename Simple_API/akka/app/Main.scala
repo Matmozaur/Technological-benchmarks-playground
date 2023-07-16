@@ -45,22 +45,6 @@ object Main extends App {
           }
         }
       }
-    } ~
-    path("simple_read_sync") {
-      get {
-        complete(HttpEntity(ContentTypes.`application/json`, """{"message": "x"}"""))
-      }
-    } ~
-    path("simple_write_sync") {
-      post {
-        entity(as[SimpleData]) { data =>
-          if (data.name == "x") {
-            complete(HttpEntity(ContentTypes.`application/json`, """{"message": "y"}"""))
-          } else {
-            complete(HttpEntity(ContentTypes.`application/json`, """{"message": "n"}"""))
-          }
-        }
-      }
     }
 
   val bindingFuture = Http().bindAndHandle(routes, "0.0.0.0", 8085)

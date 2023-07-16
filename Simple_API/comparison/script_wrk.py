@@ -7,6 +7,7 @@ import requests
 containers = [('fast_api', 8081), ('flask', 8082), ('fiber', 8083), ('gin', 8084), ('akka', 8085)]
 get_endpoints = ['simple_read']
 
+
 if __name__ == '__main__':
 
     flag = True
