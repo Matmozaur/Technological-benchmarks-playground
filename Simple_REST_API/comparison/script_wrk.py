@@ -6,7 +6,7 @@ import requests
 log = logging.getLogger()
 log.setLevel(logging.INFO)
 
-containers = [('fast_api', 8081), ('flask', 8082), ('fiber', 8083), ('gin', 8084), ('akka', 8085)]
+containers = [('fast-api', 8081), ('flask', 8082), ('fiber', 8083), ('gin', 8084), ('akka', 8085)]
 get_endpoints = ['simple_read']
 
 
@@ -22,7 +22,7 @@ if __name__ == '__main__':
                     raise Exception
             except Exception as e:
                 flag = True
-                logging.warning(e)
+                logging.debug(e)
                 logging.info(f'Service {freamework} not yet ready')
                 time.sleep(5)
 

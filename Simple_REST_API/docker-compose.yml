@@ -1,16 +1,18 @@
 version: "3.9"
 
 services:
-  fast_api:
-    container_name: fast_api
+  fast-api:
+    container_name: fast-api
     build:
       context: ./fast_api
       dockerfile: ./Dockerfile
+    env_file:
+      .env
     deploy:
-      resources:
-        limits:
-          cpus: '2.0'
-          memory: 2000M
+#      resources:
+#        limits:
+#          cpus: '2.0'
+#          memory: 2000M
       restart_policy:
         condition: on-failure
         max_attempts: 3
@@ -21,11 +23,13 @@ services:
     build:
       context: ./flask
       dockerfile: ./Dockerfile
+    env_file:
+      .env
     deploy:
-      resources:
-        limits:
-          cpus: '2.0'
-          memory: 2000M
+#      resources:
+#        limits:
+#          cpus: '2.0'
+#          memory: 2000M
       restart_policy:
         condition: on-failure
         max_attempts: 3
@@ -37,11 +41,13 @@ services:
     build:
       context: ./fiber
       dockerfile: ./Dockerfile
+    env_file:
+      .env
     deploy:
-      resources:
-        limits:
-          cpus: '2.0'
-          memory: 2000M
+#      resources:
+#        limits:
+#          cpus: '2.0'
+#          memory: 2000M
       restart_policy:
         condition: on-failure
         max_attempts: 3
@@ -53,11 +59,13 @@ services:
     build:
       context: ./gin
       dockerfile: ./Dockerfile
+    env_file:
+      .env
     deploy:
-      resources:
-        limits:
-          cpus: '2.0'
-          memory: 2000M
+#      resources:
+#        limits:
+#          cpus: '2.0'
+#          memory: 2000M
       restart_policy:
         condition: on-failure
         max_attempts: 3
@@ -69,11 +77,13 @@ services:
     build:
       context: ./akka
       dockerfile: ./Dockerfile
+    env_file:
+      .env
     deploy:
-      resources:
-        limits:
-          cpus: '2.0'
-          memory: 2000M
+#      resources:
+#        limits:
+#          cpus: '2.0'
+#          memory: 2000M
       restart_policy:
         condition: on-failure
         max_attempts: 3
@@ -85,16 +95,18 @@ services:
     build:
       context: ./comparison
       dockerfile: ./Dockerfile
+    env_file:
+      .env
     deploy:
-      resources:
-        limits:
-          cpus: '2.0'
-          memory: 2000M
+#      resources:
+#        limits:
+#          cpus: '2.0'
+#          memory: 2000M
     volumes:
       - ./comparison/results:/app/results
     depends_on:
       - fiber
       - flask
-      - fast_api
+      - fast-api
       - gin
       - akka
