@@ -7,7 +7,7 @@ import requests
 log = logging.getLogger()
 log.setLevel(logging.INFO)
 
-containers = [('fast-api', 8081), ('flask', 8082), ('fiber', 8083), ('gin', 8084), ('akka', 8085)]
+containers = [('fast-api', 8081), ('flask', 8082), ('fiber', 8083), ('gin', 8084), ('akka', 8085), ('dotnet', 8086)]
 get_endpoints = ['simple_read']
 post_endpoints = ['simple_write']
 
@@ -24,6 +24,7 @@ if __name__ == '__main__':
         for freamework, port in containers:
             try:
                 r = requests.get(f' http://{freamework}:{port}/{get_endpoints[0]}')
+                logging.info(f'address: http://{freamework}:{port}/{get_endpoints[0]}')
                 if r.status_code != 200:
                     raise Exception
             except Exception as e:
