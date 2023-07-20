@@ -4,6 +4,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenAnyIP(8086);
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
