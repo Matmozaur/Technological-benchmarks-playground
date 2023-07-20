@@ -7,7 +7,7 @@ import requests
 log = logging.getLogger()
 log.setLevel(logging.INFO)
 
-containers = [('dotnet', 8086)]
+containers = [('fast-api', 8081), ('flask', 8082), ('fiber', 8083), ('gin', 8084), ('akka', 8085), ('dotnet', 8086)]
 get_endpoints = ['simple_read']
 post_endpoints = ['simple_write']
 
