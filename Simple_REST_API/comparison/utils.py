@@ -3,6 +3,7 @@ import os
 import time
 import requests
 
+import pandas as pd
 import matplotlib.pyplot as plt
 
 GET_ENDPOINTS = os.getenv('GET_ENDPOINTS').split(';')
@@ -30,7 +31,6 @@ def wait_for_services(containers, get_endpoint):
 
 
 def fix_number(number):
-    number = number.replace('ms', '').replace('s', '')
     if 'k' in number:
         return float(number.replace('k', '')) * 1000
     if 'm' in number:
@@ -41,7 +41,11 @@ def fix_number(number):
 def plot_results(results):
     for endpoint in GET_ENDPOINTS+POST_ENDPOINTS:
         for metric, r in zip(['Latency', 'Req/Sec'], [True, False]):
-            y = [(k, float(fix_number(v[endpoint][metric]['avg']))) for k, v in results.items()]
+            if metric == 'Latency':
+                y = [(k, pd.to_timedelta((v[endpoint][metric]['avg'])).total_seconds()*1000)
+                     for k, v in results.items()]
+            else:
+                y = [(k, float(fix_number(v[endpoint][metric]['avg']))) for k, v in results.items()]
             y = sorted(y, key=lambda x: x[1], reverse=r)
             plt.figure(figsize=(20, 8))
             plot = plt.bar([x[0] for x in y], [x[1] for x in y])
