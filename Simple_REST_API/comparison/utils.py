@@ -1,8 +1,12 @@
 import logging
+import os
 import time
 import requests
 
 import matplotlib.pyplot as plt
+
+GET_ENDPOINTS = os.getenv('GET_ENDPOINTS').split(';')
+POST_ENDPOINTS = os.getenv('POST_ENDPOINTS').split(';')
 
 log = logging.getLogger()
 log.setLevel(logging.INFO)
@@ -25,12 +29,19 @@ def wait_for_services(containers, get_endpoint):
                 time.sleep(5)
 
 
+def fix_number(number):
+    number = number.replace('ms', '').replace('s', '')
+    if 'k' in number:
+        return float(number.replace('k', '')) * 1000
+    if 'm' in number:
+        return float(number.replace('m', '')) * 1000000
+    return number
+
+
 def plot_results(results):
-    for endpoint in ['simple_read', 'simple_write']:
-        for metric, r in zip(['Latency',
-                              # 'Req/Sec'
-                              ], [True, False]):
-            y = [(k, float(v[endpoint][metric]['avg'].replace('ms', ''))) for k, v in results.items()]
+    for endpoint in GET_ENDPOINTS+POST_ENDPOINTS:
+        for metric, r in zip(['Latency', 'Req/Sec'], [True, False]):
+            y = [(k, float(fix_number(v[endpoint][metric]['avg']))) for k, v in results.items()]
             y = sorted(y, key=lambda x: x[1], reverse=r)
             plt.figure(figsize=(20, 8))
             plot = plt.bar([x[0] for x in y], [x[1] for x in y])
@@ -41,4 +52,4 @@ def plot_results(results):
             plt.title(f"{endpoint} {metric}")
             plt.xlabel("Freamework")
             plt.ylabel("Latency (ms)")
-            plt.savefig(f'/app/results/{endpoint}_{metric}.png')
+            plt.savefig(f'/app/results/{endpoint}_{metric.replace("/", "")}.png')
