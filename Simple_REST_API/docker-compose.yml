@@ -72,60 +72,60 @@ services:
     ports:
     - "8084:8084"
 
-  akka:
-    container_name: akka
-    build:
-      context: ./akka
-      dockerfile: ./Dockerfile
-    env_file:
-      .env
-    deploy:
-#      resources:
-#        limits:
-#          cpus: '2.0'
-#          memory: 2000M
-      restart_policy:
-        condition: on-failure
-        max_attempts: 3
-    ports:
-    - "8085:8085"
-
-  dotnet:
-    container_name: dotnet
-    build:
-      context: ./dotnet
-      dockerfile: ./Dockerfile
-    env_file:
-      .env
-    deploy:
-#      resources:
-#        limits:
-#          cpus: '2.0'
-#          memory: 2000M
-      restart_policy:
-        condition: on-failure
-        max_attempts: 3
-    ports:
-      - "8086:8086"
-
-  comparison:
-    container_name: comparison_script
-    build:
-      context: ./comparison
-      dockerfile: ./Dockerfile
-    env_file:
-      .env
-    deploy:
-#      resources:
-#        limits:
-#          cpus: '2.0'
-#          memory: 2000M
-    volumes:
-      - ./comparison/results:/app/results
-    depends_on:
-       - fiber
-       - flask
-       - fast-api
-       - gin
-       - akka
-       - dotnet
+#  akka:
+#    container_name: akka
+#    build:
+#      context: ./akka
+#      dockerfile: ./Dockerfile
+#    env_file:
+#      .env
+#    deploy:
+##      resources:
+##        limits:
+##          cpus: '2.0'
+##          memory: 2000M
+#      restart_policy:
+#        condition: on-failure
+#        max_attempts: 3
+#    ports:
+#    - "8085:8085"
+#
+#  dotnet:
+#    container_name: dotnet
+#    build:
+#      context: ./dotnet
+#      dockerfile: ./Dockerfile
+#    env_file:
+#      .env
+#    deploy:
+##      resources:
+##        limits:
+##          cpus: '2.0'
+##          memory: 2000M
+#      restart_policy:
+#        condition: on-failure
+#        max_attempts: 3
+#    ports:
+#      - "8086:8086"
+#
+#  comparison:
+#    container_name: comparison_script
+#    build:
+#      context: ./comparison
+#      dockerfile: ./Dockerfile
+#    env_file:
+#      .env
+#    deploy:
+##      resources:
+##        limits:
+##          cpus: '2.0'
+##          memory: 2000M
+#    volumes:
+#      - ./comparison/results:/app/results
+#    depends_on:
+#       - fiber
+#       - flask
+#       - fast-api
+#       - gin
+#       - akka
+#       - dotnet

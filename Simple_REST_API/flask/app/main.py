@@ -9,6 +9,14 @@ log.setLevel(logging.ERROR)
 app = Flask(__name__)
 
 
+def custom_read_f():
+    return {"message": [x for x in range(100) if x % 5 == 0]}
+
+
+def custom_write_f(request):
+    return {"message": "y" if request['sub_text'] in request['text'] else 'n'}
+
+
 @app.route("/simple_read", methods=['GET'])
 async def simple_read():
     return {"message": "x"}
@@ -21,6 +29,16 @@ async def simple_write():
     except AssertionError:
         return {"message": "n"}
     return {"message": "y"}
+
+
+@app.route("/custom_read", methods=['GET'])
+async def custom_read():
+    return custom_read_f()
+
+
+@app.route("/custom_write", methods=['POST'])
+async def custom_write():
+    return custom_write_f(request)
 
 
 @app.route("/simple_read_sync", methods=['GET'])
