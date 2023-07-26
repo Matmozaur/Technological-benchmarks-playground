@@ -38,7 +38,7 @@ async def custom_read():
 
 @app.route("/custom_write", methods=['POST'])
 async def custom_write():
-    return custom_write_f(request)
+    return custom_write_f(request.get_json())
 
 
 @app.route("/simple_read_sync", methods=['GET'])

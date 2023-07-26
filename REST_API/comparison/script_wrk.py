@@ -9,7 +9,9 @@ from utils import wait_for_services, plot_results
 log = logging.getLogger()
 log.setLevel(logging.INFO)
 
-CONTAINERS = [('fast-api', 8081), ('flask', 8082), ('fiber', 8083), ('gin', 8084), ('akka', 8085), ('dotnet', 8086)]
+CONTAINERS = [('fast-api', 8081), ('flask', 8082), ('fiber', 8083), ('gin', 8084), ('akka', 8085),
+              # ('dotnet', 8086)
+              ]
 
 GET_ENDPOINTS = os.getenv('GET_ENDPOINTS').split(';')
 POST_ENDPOINTS = os.getenv('POST_ENDPOINTS').split(';')
@@ -38,7 +40,7 @@ if __name__ == '__main__':
 
         for endpoint in POST_ENDPOINTS:
             subprocess.run([f'echo "{endpoint}" >> /app/results/results_logs.txt'], shell=True)
-            res = subprocess.run([f'wrk -t{WRK_THREADS} -c{WRK_CONNECTIONS} -d{WRK_TIME}  -s ./app/post.lua '
+            res = subprocess.run([f'wrk -t{WRK_THREADS} -c{WRK_CONNECTIONS} -d{WRK_TIME}  -s ./app/{endpoint}.lua '
                                   f'http://{freamework}:{port}/{endpoint} | tee -a /app/results'
                                   f'/results_logs.txt'],
                                  capture_output=True, text=True, shell=True).stdout.split("\n")[3:5]
