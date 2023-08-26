@@ -18,3 +18,9 @@ config (.env file), most important:
 - WRK_TIME - wrk script execution time
 - WRK_CONNECTIONS - wrk connections to the container
 - WRK_THREADS - number of used threads
+
+### GQL_API
+
+
+### ORM_DB
+
