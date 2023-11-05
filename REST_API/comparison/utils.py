@@ -13,7 +13,7 @@ log = logging.getLogger()
 log.setLevel(logging.INFO)
 
 
-def wait_for_services(containers, get_endpoint):
+def wait_for_services(containers, get_endpoint, wait_time):
     flag = True
     while flag:
         flag = False
@@ -27,7 +27,7 @@ def wait_for_services(containers, get_endpoint):
                 flag = True
                 logging.debug(e)
                 logging.info(f'Service {freamework} not yet ready')
-                time.sleep(5)
+                time.sleep(wait_time)
 
 
 def fix_number(number):

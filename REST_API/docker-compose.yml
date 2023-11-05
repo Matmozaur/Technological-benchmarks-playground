@@ -9,13 +9,13 @@ services:
     env_file:
       .env
     deploy:
-#      resources:
-#        limits:
-#          cpus: '2.0'
-#          memory: 2000M
-        restart_policy:
-          condition: on-failure
-          max_attempts: 3
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 3000M
+      restart_policy:
+        condition: on-failure
+        max_attempts: 2
     ports:
       - "8081:8081"
   flask:
@@ -26,13 +26,13 @@ services:
     env_file:
         .env
     deploy:
-#      resources:
-#        limits:
-#          cpus: '2.0'
-#          memory: 2000M
-     restart_policy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 3000M
+      restart_policy:
         condition: on-failure
-        max_attempts: 3
+        max_attempts: 2
     ports:
     - "8082:8082"
 
@@ -44,13 +44,13 @@ services:
     env_file:
       .env
     deploy:
-#      resources:
-#        limits:
-#          cpus: '2.0'
-#          memory: 2000M
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 3000M
       restart_policy:
         condition: on-failure
-        max_attempts: 3
+        max_attempts: 2
     ports:
     - "8083:8083"
 
@@ -62,13 +62,13 @@ services:
     env_file:
       .env
     deploy:
-#      resources:
-#        limits:
-#          cpus: '2.0'
-#          memory: 2000M
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 3000M
       restart_policy:
         condition: on-failure
-        max_attempts: 3
+        max_attempts: 2
     ports:
     - "8084:8084"
 
@@ -80,13 +80,13 @@ services:
     env_file:
       .env
     deploy:
-#      resources:
-#        limits:
-#          cpus: '2.0'
-#          memory: 2000M
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 3000M
       restart_policy:
         condition: on-failure
-        max_attempts: 3
+        max_attempts: 2
     ports:
     - "8085:8085"
 #
@@ -104,7 +104,7 @@ services:
 ##          memory: 2000M
 #      restart_policy:
 #        condition: on-failure
-#        max_attempts: 3
+#        max_attempts: 2
 #    ports:
 #      - "8086:8086"
 

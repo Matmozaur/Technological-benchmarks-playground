@@ -20,9 +20,11 @@ WRK_TIME = os.getenv('WRK_TIME')
 WRK_CONNECTIONS = os.getenv('WRK_CONNECTIONS')
 WRK_THREADS = os.getenv('WRK_THREADS')
 
+WAIT_TIME = os.getenv('WAIT_TIME', 10)
+
 if __name__ == '__main__':
 
-    wait_for_services(CONTAINERS, GET_ENDPOINTS[0])
+    wait_for_services(CONTAINERS, GET_ENDPOINTS[0], WAIT_TIME)
 
     results = dict()
 
